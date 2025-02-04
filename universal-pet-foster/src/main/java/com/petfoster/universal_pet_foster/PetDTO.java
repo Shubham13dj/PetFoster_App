@@ -15,6 +15,11 @@ public class PetDTO {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	public PetDTO() {
+		
+	}
+	
 	public Long getId() {
 		return id;
 	}

@@ -25,7 +25,7 @@ public class Foster {
 	private String name;
 	private String contactDetails;
 	
-	@OneToMany(mappedBy = "forster")
+	@OneToMany(mappedBy = "foster")
 	private List<Pet> pets;
 
 	public Long getId() {

@@ -15,6 +15,8 @@ import com.petfoster.universal_pet_foster.repository.FosterRepository;
 import com.petfoster.universal_pet_foster.repository.PetApplicationRepository;
 import com.petfoster.universal_pet_foster.repository.PetRepository;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class PetApplicationService {
 	
@@ -30,6 +32,7 @@ public class PetApplicationService {
 	@Autowired 
 	private ModelMapper modelMapper;
 	
+	@Transactional
 	public PetApplicationDTO applyForFoster(PetApplicationDTO petApplicationDTO)
 	{
 		Pet pet = petRepository.findById(petApplicationDTO.getPetId()).orElseThrow(()->new RuntimeException("Pet not found"));
@@ -52,6 +55,7 @@ public class PetApplicationService {
 		return modelMapper.map(petApplication, PetApplicationDTO.class);
 	}
 	
+	@Transactional
 	public PetApplicationDTO updateApplicationStatus(Long id, String status)
 	{
 		PetApplication petApplication = petApplicationRepository.findById(id).orElseThrow(()->new RuntimeException("Application not found"));

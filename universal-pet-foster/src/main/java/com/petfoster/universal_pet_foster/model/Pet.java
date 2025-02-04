@@ -4,6 +4,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,14 +23,20 @@ public class Pet {
 	private String name;
 	private String breed;
 	private String description;
-
+	
+	@ManyToOne
+	@JoinColumn(name = "foster_id")
+	private Foster foster;
+	
+	public Pet() {
+		
+	}
+	
 	public Pet(Long id, String name, String breed, String des) {
-		// TODO Auto-generated constructor stub
+		
 	}
 
-	// private String status;
 	public Object getDescription() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

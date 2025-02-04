@@ -5,11 +5,15 @@ import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.petfoster.universal_pet_foster.PetDTO;
 import com.petfoster.universal_pet_foster.model.Pet;
 import com.petfoster.universal_pet_foster.repository.PetRepository;
 
+import jakarta.transaction.Transactional;
+
+@Service
 public class PetService {
 
 	@Autowired
@@ -35,6 +39,7 @@ public class PetService {
 		return modelMapper.map(pet, PetDTO.class);
 	}
 	
+	@Transactional
 	public PetDTO addPet(PetDTO petDto)
 	{
 		Pet pet = modelMapper.map(petDto, Pet.class);
@@ -42,6 +47,7 @@ public class PetService {
 		return modelMapper.map(pet, PetDTO.class);
 	}
 	
+	@Transactional
 	public PetDTO updatePet(Long id, PetDTO petDTO)
 	{
 		Pet pet = petRepository.findById(id).orElseThrow(()->new RuntimeException("Pet Not found"));
@@ -54,6 +60,7 @@ public class PetService {
 		
 	}
 	
+	@Transactional
 	public void deletePet(Long id)
 	{
 		petRepository.deleteById(id);

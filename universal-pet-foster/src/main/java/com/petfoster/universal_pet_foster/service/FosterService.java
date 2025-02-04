@@ -11,6 +11,8 @@ import com.petfoster.universal_pet_foster.FosterDTO;
 import com.petfoster.universal_pet_foster.model.Foster;
 import com.petfoster.universal_pet_foster.repository.FosterRepository;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class FosterService {
 
@@ -35,12 +37,14 @@ public class FosterService {
 		return modelMapper.map(foster, FosterDTO.class);
 	}
 	
+	@Transactional
 	public FosterDTO addFoster(FosterDTO fosterDTO)
 	{
 		Foster foster = modelMapper.map(fosterDTO, Foster.class);
 		return modelMapper.map(fosterRepository.save(foster), FosterDTO.class);
 	}
 	
+	@Transactional
 	public FosterDTO updateFoster(Long id, FosterDTO fosterDTO)
 	{
 		Foster foster = fosterRepository.findById(id).orElseThrow(()->new RuntimeException("Foster not found"));
@@ -51,6 +55,7 @@ public class FosterService {
 		return modelMapper.map(foster, FosterDTO.class);
 	}
 	
+	@Transactional
 	public void deleteFoster(Long id)
 	{
 		fosterRepository.deleteById(id);
